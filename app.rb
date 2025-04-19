@@ -6,7 +6,7 @@ require "dotenv/load"
 
 get("/") do
 
-  exchange_rate_url= "https://api.exchangerate.host/list?access_key=" + ENV.fetch("EXCHANGE_RATE_KEY")
+  exchange_rate_url= "https://api.exchangerate.host/list?access_key=#{ENV.fetch("EXCHANGE_RATE_KEY")}"
 
   raw_response= HTTP.get(exchange_rate_url).to_s
 
@@ -19,7 +19,7 @@ end
 
 get("/:base_currency") do
 
-  exchange_rate_url= "https://api.exchangerate.host/list?access_key=" + ENV.fetch("EXCHANGE_RATE_KEY")
+  exchange_rate_url= "https://api.exchangerate.host/list?access_key=#{ENV.fetch("EXCHANGE_RATE_KEY")}"
 
   raw_response= HTTP.get(exchange_rate_url).to_s
 
@@ -44,7 +44,7 @@ get("/:base_currency/:result_currency") do
 
   parsed_response= JSON.parse(raw_response)
 
-  @result = parsed_response.fetch("result").to_s
+  @result = parsed_response.fetch("result")
 
   erb(:flexible2)
 end 
