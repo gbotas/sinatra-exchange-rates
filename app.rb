@@ -34,17 +34,19 @@ end
 
 get("/:base_currency/:result_currency") do
 
-  exchange_rate_url= "https://api.exchangerate.host/convert?access_key=" + ENV.fetch("EXCHANGE_RATE_KEY") + "&from=" + @base_currency + "&to=" @result_currency + "&amount=1"
+  @base_currency= params.fetch("base_currency").to_s
+
+  @result_currency = params.fetch("result_currency").to_s
+
+  exchange_rate_url= "https://api.exchangerate.host/convert?access_key=#{ENV.fetch("EXCHANGE_RATE_KEY")}&from=#{@base_currency}&to=#{@result_currency}&amount=1"
 
   raw_response= HTTP.get(exchange_rate_url).to_s
 
   parsed_response= JSON.parse(raw_response)
 
-  @currencies = parsed_response.fetch("currencies").keys
+ 
   
-  @base_currency= params.fetch("base_currency").to_s
-
-  @result_currency = params.fetch("result_currency").to_s
+ 
 
   erb(:flexible2)
 end 

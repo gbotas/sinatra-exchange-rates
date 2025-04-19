@@ -5,9 +5,9 @@
 <ul>
 
   <% @currencies.each do |a_currency| %>
-  <li> 
+  <li> <a href="/<%=@base_currency%>/<%=a_currency%>">
   Convert 1 <%=@base_currency%> to <%=a_currency%>...
-  </li>
+  </a> </li>
 
   <% end %>
 </ul>
