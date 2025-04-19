@@ -44,9 +44,7 @@ get("/:base_currency/:result_currency") do
 
   parsed_response= JSON.parse(raw_response)
 
- 
-  
- 
+  @result = parsed_response.fetch("result").to_s
 
   erb(:flexible2)
 end 
